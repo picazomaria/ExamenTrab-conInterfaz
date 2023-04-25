@@ -1,4 +1,5 @@
 package Paginas;
+//Maria Picazo Sánchez
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -48,6 +49,7 @@ public class MainFrame extends JFrame implements Serializable{
     private JRadioButton botHub2;
     private JRadioButton botHub3;
     private JLabel etiHub;
+    private JButton botpeso;
     private Puerto puerto;
     public MainFrame() {
         setContentPane(mainPanel);
@@ -322,6 +324,33 @@ public class MainFrame extends JFrame implements Serializable{
             @Override
             public void actionPerformed(ActionEvent e) {
                 textEstado.setText(puerto.getP(2).toString());
+            }
+        });
+        //listener del check_aduanas
+        botpeso.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(Objects.equals(textPeso.getText(), "")){
+                    etiError.setText("* Error no ha introducido un peso");
+                }
+                else{
+                    int hub;
+                    if(botHub1.isSelected()){
+                        hub=0;
+                    }else if(botHub2.isSelected()){
+                        hub=1;
+                    }else{
+                        hub=2;
+                    }
+                    String contenedores=puerto.check_aduana(Integer.parseInt(textPeso.getText()),hub);
+                    if (!Objects.equals(contenedores, "")) {
+                        etiError.setText("");
+                        pag3peso verPag3 = new pag3peso(contenedores);
+                        verPag3.setVisible(true);
+                    }else {
+                        etiError.setText("* Error número de identificador equivocado");
+                    }
+                }
             }
         });
     }

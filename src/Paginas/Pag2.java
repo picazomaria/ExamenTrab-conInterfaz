@@ -2,6 +2,7 @@ package Paginas;
 
 import javax.swing.*;
 import PaqC05.*;
+//Maria Picazo Sánchez
 public class Pag2 extends JFrame{
     private JTextField textNumIdentificacion;
     private JTextField textPeso;
